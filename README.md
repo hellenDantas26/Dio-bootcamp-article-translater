@@ -31,6 +31,33 @@ def extract_text_from_url(url):
     # return text
 
 extract_text_from_url('https://dev.to/devteam/github-copilot-cli-challenge-badges-are-here-28-chances-to-win-a-prize-3c42')
+*****______________________________________________________________
+from langchain_openai.chat_models.azure import AzureChatOpenAI
 
+client = AzureChatOpenAI(
+    azure_endpoint= "https://helle-ml1lekc7-swedencentral.cognitiveservices.azure.com/",
+    api_key= "xxxxxxxxxxx",
+    api_version= "2024-12-01-preview",
+    deployment_name= "gpt-5.2-chat",
+    max_retries=0
+)
+
+def translate_article(text, lang):
+  messages = [
       ("system", "Você atua como tradutor de textos"),
+      ("user", f"Traduza o {text} para o idioma {lang} e responda em markdown")
+  ]
 
+  response = client.invoke(messages)
+  # Removed print(response.content) from here to separate concerns
+  return response.content
+
+# Explicitly print the result of the function call
+print(translate_article("GitHub Copilot CLI Challenge Badges Are Here + 28 Chances to Win a Prize!","portugues"))
+
+*****___________________________________________________________________________
+
+url = 'https://dev.to/devteam/github-copilot-cli-challenge-badges-are-here-28-chances-to-win-a-prize-3c42'
+text = extract_text_from_url(url)
+article = translate_article(text, "bt-br")
+print(article)
