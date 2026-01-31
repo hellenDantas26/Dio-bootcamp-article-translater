@@ -31,7 +31,10 @@ def extract_text_from_url(url):
     # return text
 
 extract_text_from_url('https://dev.to/devteam/github-copilot-cli-challenge-badges-are-here-28-chances-to-win-a-prize-3c42')
+
+
 *****______________________________________________________________
+
 from langchain_openai.chat_models.azure import AzureChatOpenAI
 
 client = AzureChatOpenAI(
